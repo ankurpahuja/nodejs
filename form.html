@@ -23,7 +23,7 @@
       // read the file contents and send to nodejs server as an ajax post request.
       csvtojson(file);
 
-      printTable(file);
+      //printTable(file);
 
       // post the results
       //$('#list').append(output);
@@ -33,17 +33,19 @@
       reader.readAsText(file);
       reader.onload = function(event){
       var csv = event.target.result;
-      var data = $.csv.toArrays(csv);
-      var datatojson = JSON.stringify(data);
+      var datainput = $.csv.toArrays(csv);
+      var datatojson = JSON.stringify(datainput);
       //alert(datatojson);
             $.ajax({
             url: 'http://localhost:9090/csv',
             type: 'post',
             dataType: 'json',
             success: function (data) {
-                $('#contents').html(data);
+                alert(data);
+                var dataoutput = JSON.stringify(data[0]);
+                $('#contents').html(dataoutput);
             },
-            data: datatojson
+            data: {'datatojson': datatojson}
         });
       }
     }

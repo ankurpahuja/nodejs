@@ -21,7 +21,9 @@ app.get('/', function (req, res) {
 app.post('/csv', function (req, res) {
     console.log("got request - post");
     //console.log(util.inspect(req.body, {showHidden: false, depth: null}))
-    var csvarray = JSON.parse(req.body);
+    var csvarray = JSON.parse(req.body.datatojson);
+    //console.log(csvarray);
+    res.send(csvarray);
 });
 
 var server = app.listen(9090, function(){
